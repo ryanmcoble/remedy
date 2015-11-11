@@ -12,7 +12,7 @@ fi
 
 if [ -d "$OPENSHIFT_REPO_DIR/vendor" ]; then
         echo 'Dependencies already installed, Moving on...'
-        php $OPENSHIFT_DATA_DIR/composer.phar -q --no-ansi dump-autoload;
+        php $OPENSHIFT_DATA_DIR/composer.phar --no-ansi dump-autoload;
 else
         echo 'Hang in there, we are getting ready to Install/Update dependencies'
         echo 'Installing/Updating dependencies'; 
