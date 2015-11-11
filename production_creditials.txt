@@ -1,9 +1,0 @@
--- MySQL
-
-Root User: adminE7kWehY
-Root Password: 22XkkcsXwfgL
-Database Name: remedy
-
-Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
-
-PHP MyAdmin URL: https://remedy-ryanmcoble.rhcloud.com/phpmyadmin/
