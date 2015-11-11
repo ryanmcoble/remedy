@@ -1,1 +1,2 @@
 php $OPENSHIFT_REPO_DIR/artisan migrate --force
+php $OPENSHIFT_REPO_DIR/composer.phar dump-autoload -o
