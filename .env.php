@@ -1,7 +1,7 @@
 <?php return array(
 	
 	//MySQL
-	'DB_HOST' => '127.0.0.1',
+	'DB_HOST' => $_ENV['OPENSHIFT_MYSQL_DB_HOST'],
 	'DB_NAME' => 'remedy',
 	'DB_USER' => 'adminE7kWehY',
 	'DB_PASS' => '22XkkcsXwfgL',
