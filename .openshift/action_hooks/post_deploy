@@ -1,2 +1,3 @@
-php $OPENSHIFT_REPO_DIR/artisan migrate --force
+cd $OPENSHIFT_REPO_DIR
+php artisan migrate --force
 composer dump-autoload
