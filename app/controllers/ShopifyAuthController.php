@@ -49,7 +49,7 @@ class ShopifyAuthController extends Controller {
 			/**
 			 * Create webhook for uninstall
 			 */
-			$hookData = array('webhook' => array('topic' => 'app/uninstalled', 'address' => 'https://' . Request::server('HTTP_HOST') . '/uninstall-hook', 'format' => 'json'));
+			$hookData = array('webhook' => array('topic' => 'app/uninstalled', 'address' => 'https://' . $_ENV['HOST'] . '/uninstall-hook', 'format' => 'json'));
 			try {
 				$sh->setup(['ACCESS_TOKEN' => $shop->getAccessToken()]);
 				$sh->call(['URL' => 'webhooks.json', 'METHOD' => 'POST', 'DATA' => $hookData]);

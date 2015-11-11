@@ -7,8 +7,8 @@
 	'DB_PASS' => '22XkkcsXwfgL',
 
 	//Shopify
-	'APP_API_KEY'		=> '2b699a7035674b0c3c9c73817cec8bab',
-	'APP_API_SECRET'	=> 'fb34ab862a93803da864166b66a63f2c',
+	'APP_API_KEY'		=> '08ae144bcfce5a5683ba322043110690',
+	'APP_API_SECRET'	=> '1a8a3c13ab3b4cf32ba27d821740f7c9',
 	'API_ACTK_KEY'      => 'E*8Y^BiXx&SZtdyyNEMocyDt$z8im$$y',
 	//'APP_API_SCOPE'	=> '["read_products", "write_products", "read_script_tags", "write_script_tags", "read_themes", "write_themes"]',
 	'APP_API_SCOPE'		=> '["read_products"]',
