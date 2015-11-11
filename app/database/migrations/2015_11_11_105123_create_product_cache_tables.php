@@ -12,7 +12,30 @@ class CreateProductCacheTables extends Migration {
 	 */
 	public function up()
 	{
-		//
+		// shopify products cache
+		// Schema::create('', function(Blueprint $t) {
+
+		// });
+
+		// // shopify product variants cache
+		// Schema::create('', function(Blueprint $t) {
+
+		// });
+
+		// // shopify product images cache
+		// Schema::create('', function(Blueprint $t) {
+
+		// });
+
+		// // shopify product options cache
+		// Schema::create('', function(Blueprint $t) {
+
+		// });
+
+		// // shopify product metafields cache
+		// Schema::create('', function(Blueprint $t) {
+
+		// });
 	}
 
 	/**
@@ -23,6 +46,7 @@ class CreateProductCacheTables extends Migration {
 	public function down()
 	{
 		//
+
 	}
 
 }
