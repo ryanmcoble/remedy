@@ -39,6 +39,41 @@ Route::post('/uninstall', array(
 
 
 /**
- * Public API routes
+ * Public API v1 routes
  */
+Route::group(['prefix' => 'api/v1', 'before' => 'api.auth'], function() {
+
+	/**
+	 * Get a single product
+	 */
+	Route::get('products/{id}', array(
+		'uses' => 'ProductController@getOne'
+	));
+
+	/**
+	 * Get all / filtered / sorted products
+	 */
+	Route::get('products', array(
+		'uses' => 'ProductController@getMany'
+	));
+
+});
+
+
+
+/**
+ * Public API v2 routes
+ */
+Route::group(['prefix' => 'api/v{version_number}'], function() {
+
+	/**
+	 * Future API version
+	 */
+	Route::get('{any?}', function() {
+		return Response::json(['status' => 'cool', 'message' => 'I like where your head is at but mine is not there yet. ;)'], 418);
+	});
+	
+
+});
+
 

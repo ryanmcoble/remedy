@@ -107,3 +107,12 @@ Route::filter('shopify.auth', function()
 		App::abort(403, 'Unauthorized through Shopify, please re-install');
 	}
 });
+
+
+Route::filter('api.auth', function()
+{
+	// if(!Session::has('shop'))
+	// {
+	// 	App::abort(403, 'Unauthorized through Shopify, please re-install');
+	// }
+});
