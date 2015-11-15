@@ -18,6 +18,20 @@ Route::get('/', function()
 });
 
 
+Route::get('/install', function()
+{
+	return View::make('install');
+});
+Route::post('/install', function()
+{
+	$domain = Input::get('domain');
+
+	$shopifyController = new ShopifyAuthController;
+	$installUrl = $shopifyController->installURL($domain);
+
+	return View::make('install')->with('install_url', $installUrl);
+});
+
 
 /**
  * Shopify-related routes
