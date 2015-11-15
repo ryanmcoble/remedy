@@ -1736,5 +1736,180 @@
                 "email": "josh@rocketcode.io"
             }
         ]
+    },
+    {
+        "name": "league/fractal",
+        "version": "0.11.0",
+        "version_normalized": "0.11.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/thephpleague/fractal.git",
+            "reference": "5abf7b1ce12fea1e575355f76f4f58f15dba4be4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/thephpleague/fractal/zipball/5abf7b1ce12fea1e575355f76f4f58f15dba4be4",
+            "reference": "5abf7b1ce12fea1e575355f76f4f58f15dba4be4",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "illuminate/pagination": "~4.1",
+            "mockery/mockery": "~0.9",
+            "pagerfanta/pagerfanta": "~1.0.0",
+            "phpunit/phpunit": "~4.0",
+            "squizlabs/php_codesniffer": "~1.5",
+            "zendframework/zend-paginator": "~2.3"
+        },
+        "suggest": {
+            "illuminate/pagination": "The Illuminate Pagination component.",
+            "pagerfanta/pagerfanta": "Pagerfanta Paginator",
+            "zendframework/zend-paginator": "Zend Framework Paginator"
+        },
+        "time": "2014-12-10 16:59:07",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.10-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "League\\Fractal\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Phil Sturgeon",
+                "email": "me@philsturgeon.uk",
+                "homepage": "http://philsturgeon.uk/",
+                "role": "Developer"
+            }
+        ],
+        "description": "Handle the output of complex data structures ready for JSON output.",
+        "homepage": "http://fractal.thephpleague.com/",
+        "keywords": [
+            "api",
+            "json",
+            "league",
+            "rest"
+        ]
+    },
+    {
+        "name": "ellipsesynergie/api-response",
+        "version": "0.8.1",
+        "version_normalized": "0.8.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ellipsesynergie/api-response.git",
+            "reference": "4fa42782f5684a875617915f34b16d0488ae8cfc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ellipsesynergie/api-response/zipball/4fa42782f5684a875617915f34b16d0488ae8cfc",
+            "reference": "4fa42782f5684a875617915f34b16d0488ae8cfc",
+            "shasum": ""
+        },
+        "require": {
+            "league/fractal": "0.11.*",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2015-02-23 19:24:12",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.8-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "EllipseSynergie\\ApiResponse\\": "src",
+                "EllipseSynergie\\ApiResponse\\Tests\\": "tests"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Maxime Beaudoin",
+                "email": "maxime.beaudoin@ellipse-synergie.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Phil Sturgeon",
+                "email": "email@philsturgeon.co.uk",
+                "role": "Developer"
+            }
+        ],
+        "description": "Simple package to handle response properly in your API",
+        "homepage": "https://github.com/ellipsesynergie/api-response",
+        "keywords": [
+            "api",
+            "fractal",
+            "json"
+        ]
+    },
+    {
+        "name": "chrisbjr/api-guard",
+        "version": "v1.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/chrisbjr/api-guard.git",
+            "reference": "06bccb283bc6e6df5f9a86c718948c49936ecdc2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/chrisbjr/api-guard/zipball/06bccb283bc6e6df5f9a86c718948c49936ecdc2",
+            "reference": "06bccb283bc6e6df5f9a86c718948c49936ecdc2",
+            "shasum": ""
+        },
+        "require": {
+            "ellipsesynergie/api-response": "0.8.*",
+            "illuminate/database": "*",
+            "illuminate/support": "4.2.*",
+            "php": ">=5.4.0"
+        },
+        "time": "2015-03-27 15:31:19",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/migrations"
+            ],
+            "psr-4": {
+                "Chrisbjr\\ApiGuard\\": "src/Chrisbjr/ApiGuard"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "Chris Bautista",
+                "email": "chrisbjr@gmail.com"
+            }
+        ],
+        "description": "A simple way of authenticating your APIs with API keys using Laravel",
+        "homepage": "https://github.com/chrisbjr/ApiGuard",
+        "keywords": [
+            "api",
+            "api authentication",
+            "api keys",
+            "json",
+            "laravel",
+            "rest"
+        ]
     }
 ]

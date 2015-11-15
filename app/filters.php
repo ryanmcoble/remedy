@@ -1,5 +1,8 @@
 <?php
 
+use Coble\General\API\RateLimiter;
+use Coble\General\API\ResponseBuilder;
+
 /*
 |--------------------------------------------------------------------------
 | Application & Route Filters
@@ -89,6 +92,8 @@ Route::filter('csrf', function()
 	}
 });
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Shopify Authentication Filter
@@ -104,15 +109,49 @@ Route::filter('shopify.auth', function()
 {
 	if(!Session::has('shop'))
 	{
-		App::abort(403, 'Unauthorized through Shopify, please re-install');
+		App::abort(403, 'Unauthorized through Shopify, please re-install the communicator app.');
 	}
 });
 
 
+
 Route::filter('api.auth', function()
 {
-	// if(!Session::has('shop'))
-	// {
-	// 	App::abort(403, 'Unauthorized through Shopify, please re-install');
-	// }
+
+	// do we have an auth header
+	$authToken = Request::header('X-Remedy-Auth');
+	if(!$authToken)
+	{
+		$builder = new ResponseBuilder();
+		$builder->setStatus(401, 'missing_api_key', 'No api key given.');
+		return $builder->getResponse();
+	}
+
+	// does that auth header contain a valid api key
+	$apiKey = ApiKey::where('public_key', $authToken)->first();
+	if(!$apiKey)
+	{
+		$builder = new ResponseBuilder();
+		$builder->setStatus(401, 'invalid_api_key', 'Unauthorized request. This event has been logged. Do it 2 more times, I DARE you!');
+		return $builder->getResponse();
+	}
+
 });
+
+
+Route::filter('api.rate', function()
+{
+	$authToken = Request::header('X-Remedy-Auth');
+	$apiKey = ApiKey::where('public_key', $authToken)->first();
+
+	// check if the api key is over their limit and store / update the cache
+	if(!RateLimiter::check($apiKey))
+	{
+		$builder = new ResponseBuilder();
+		$builder->setStatus(429, 'rate_limited', 'Too many requests. You have been rate limited, because the internet. ;)');
+		return $builder->getResponse();
+	}
+});
+
+
+

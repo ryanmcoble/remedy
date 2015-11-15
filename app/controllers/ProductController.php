@@ -1,7 +1,21 @@
 <?php
 
+use Coble\General\API\ResponseBuilder;
+use Coble\General\Repositories\ProductRepository;
+
+
 class ProductController extends BaseController
 {
+	protected $productRepo;
+	protected $response;
+
+	public function __construct(ResponseBuilder $response, ProductRepository $productRepo)
+	{
+		parent::__construct();
+
+		$this->response    = $response;
+		$this->productRepo = $productRepo;
+	}
 	
 	/**
 	 * Get a single product
@@ -31,19 +45,43 @@ class ProductController extends BaseController
 	 */
 	public function getMany()
 	{
-	    if(Input::has('filtered')) {
-			// get filtered results
+	    // if(Input::has('filters')) {
+		// 	// get filtered results
+		// }
+		// else
+		// {
+		// 	// get un-filtered results
+		// }
+
+		// if(Input::has('sorted')) {
+		// 	// sort results
+		// }
+
+
+		$limit = Input::has('limit') ? (int) Input::get('limit') : 100;
+		if($limit > 1000) $limit = 1000;
+
+
+		$products = $this->productRepo->getAll($limit)->toArray();
+
+
+		$this->response->setApiKey($this->apiKey);
+		if(!count($products))
+		{
+			$this->response->setStatus(404, 'not_found', 'No products were found.');
 		}
 		else
 		{
-			// get un-filtered results
+			$this->response->setStatus(200, 'success', count($products) . ' products were found.');
+			$this->response->setData($products);
 		}
 
-		if(Input::has('sorted')) {
-			// sort results
-		}
-
-		return '';
+		return $this->response->getResponse();
 	}
 
 }
+
+
+
+
+

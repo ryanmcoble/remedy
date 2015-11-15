@@ -2,17 +2,15 @@
 
 class BaseController extends Controller {
 
-	/**
-	 * Setup the layout used by the controller.
-	 *
-	 * @return void
-	 */
-	protected function setupLayout()
+	protected $apiKey;
+
+
+	public function __construct()
 	{
-		if ( ! is_null($this->layout))
-		{
-			$this->layout = View::make($this->layout);
-		}
+		// store the current request's api key
+		$public_key = Request::header('X-Remedy-Auth');
+
+		$this->apiKey = ApiKey::where('public_key', $public_key)->first();
 	}
 
 }

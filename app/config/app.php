@@ -123,6 +123,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
 		'RocketCode\Shopify\ShopifyServiceProvider',
+
+		'Coble\General\Repositories\RepositoriesServiceProvider',
 	),
 
 	/*

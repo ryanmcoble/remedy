@@ -1,19 +1,20 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
 
+use Coble\General\API\ResponseBuilder;
+
+
+/**
+ * Landing page, after installation / authentication
+ */
 Route::get('/', function()
 {
-	return View::make('hello');
+
+	$shop = Shop::where('domain', Session::get('shop'))->first();
+
+	$apiKey = ApiKey::where('shop_id', $shop->id)->with('accessLevel', 'shop')->first();
+
+	return View::make('hello')->with('apiKey', $apiKey);
 });
 
 
@@ -41,7 +42,7 @@ Route::post('/uninstall', array(
 /**
  * Public API v1 routes
  */
-Route::group(['prefix' => 'api/v1', 'before' => 'api.auth'], function() {
+Route::group(['prefix' => 'api/v1', 'before' => 'api.auth|api.rate'], function() {
 
 	/**
 	 * Get a single product
@@ -64,13 +65,19 @@ Route::group(['prefix' => 'api/v1', 'before' => 'api.auth'], function() {
 /**
  * Public API v2 routes
  */
-Route::group(['prefix' => 'api/v{version_number}'], function() {
+Route::group(['prefix' => 'api/v{version_number}', 'before' => 'api.auth|api.rate'], function() {
 
 	/**
 	 * Future API version
 	 */
 	Route::get('{any?}', function() {
-		return Response::json(['status' => 'cool', 'message' => 'I like where your head is at but mine is not there yet. ;)'], 418);
+
+		$public_key = Request::header('X-Remedy-Auth');
+		$apiKey = ApiKey::where('public_key', $public_key)->first();
+
+		$builder = new ResponseBuilder($apiKey);
+		$builder->setStatus(418, 'cool', 'I like where your head is at but mine is not there yet. ;)');
+		return $builder->getResponse();
 	});
 	
 

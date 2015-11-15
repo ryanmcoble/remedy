@@ -1,0 +1,19 @@
+
+-- LEGEND --
+   ** = future
+   *  = implemented
+
+
+* 1  - Rate limit by different intervals (200 requests every 2 hours)
+* 2  - Access levels (give privledge to certain api keys)
+* 3  - Api Key authorization (X-Remedy-Auth header for api key)
+* 4  - HATEOAS (Hypermedia As The Engine Of Application State) - Everything that is needed is sent in a specific format
+* 5  - REST (Representational State Transfer)
+**6  - JSON RPC (JavaScript Object Notation Remote Procedural Call) - For partial resource operations
+* 7  - Versioned (current version is v1) - For future change
+**8  - Batch call support - Underlying Shopify API calls will be handled in a queue (everything other than get)
+**9  - Supports results in different formats - Currently only JSON is supported (future formats XML and binary)
+*10  - Opinionated (in the best way) - made with sound design decisions that push good opinions on clients
+*11  - Simple installation
+     1 - Install Shopify Communicator app and receive your api key (multiple can be requested, in special cases)
+     2 - Set X-Remedy-Auth header to your api key, for all api requests

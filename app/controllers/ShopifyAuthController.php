@@ -37,7 +37,7 @@ class ShopifyAuthController extends Controller {
 			$shop = Shop::where('domain', Input::get('shop'))->first();
 
 			if (!$shop) {
-      			Log::info(__LINE__ . ': New Shop');
+      			//Log::info(__LINE__ . ': New Shop');
 				$shop = new Shop;
 			}
 
@@ -45,6 +45,17 @@ class ShopifyAuthController extends Controller {
 			$shop->setAccessToken($accessToken);
 			$shop->save();
 			$this->updateShopInfo($shop);
+
+
+			/**
+			 * Create the shop's first api key automatically, on install
+			 */
+			$apiKey = new ApiKey;
+			$apiKey->shop_id = $shop->id;
+			$apiKey->public_key = Hash::make($shop->id . 'REMEDY');
+			$apiKey->access_level_id = AccessLevel::where('title', 'Free Plus')->first()->id;
+			$apiKey->save();
+
 
 			/**
 			 * Create webhook for uninstall
@@ -74,7 +85,7 @@ class ShopifyAuthController extends Controller {
 			else {
 				Log::warning('Shop redirecting to install: ' . Input::get('shop'));
         		$sh = App::make('ShopifyAPI', ['API_KEY' => Config::get('shopify.APP_API_KEY'), 'SHOP_DOMAIN' => Input::get('shop')]);
-          		return Redirect::to($sh->installURL(['permissions' => Config::get('shopify.APP_API_SCOPE'), 'redirect' => 'https://' . $_SERVER['HTTP_HOST'] . '/auth']));
+          		return Redirect::to($sh->installURL(['permissions' => Config::get('shopify.APP_API_SCOPE'), 'redirect' => 'https://' . $_ENV['HOST'] . '/auth']));
 			}
 		}
 	} // end check()
