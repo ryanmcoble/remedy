@@ -12,9 +12,10 @@ class RepositoriesServiceProvider extends ServiceProvider
 		/**
 		 * Repository bindings
 		 */
+		
 
 		// Product
-		$this->app->singleton(ProductRepository::class, function() {
+		$this->app->singleton('Coble\General\Repositories\ProductRepository', function() {
 			return new CachingProductRepository(
 				new EloquentProductRepository,
 				$this->app['cache.store']
