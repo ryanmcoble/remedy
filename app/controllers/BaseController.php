@@ -1,16 +1,18 @@
 <?php
 
+use Coble\General\Commanding\CommandBus;
+
+
 class BaseController extends Controller {
 
-	protected $apiKey;
+	protected $commandBus;
+	
 
-
-	public function __construct()
+	public function __construct(CommandBus $commandBus)
 	{
-		// store the current request's api key
-		$public_key = Request::header('X-Remedy-Auth');
 
-		$this->apiKey = ApiKey::where('public_key', $public_key)->first();
+		// inject the command bus
+		$this->commandBus  = $commandBus;
 	}
 
 }

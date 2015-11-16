@@ -124,6 +124,7 @@ return array(
 
 		'RocketCode\Shopify\ShopifyServiceProvider',
 
+		'Coble\General\Commanding\CommandingServiceProvider',
 		'Coble\General\Repositories\RepositoriesServiceProvider',
 	),
 

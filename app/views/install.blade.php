@@ -16,6 +16,9 @@
 			max-width: 800px;
 			width: 80%;
 			margin: 0 auto;
+		}
+
+		h1 {
 			text-align: center;
 		}
 

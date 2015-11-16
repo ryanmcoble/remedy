@@ -15,7 +15,7 @@ Route::get('/', function()
 	$apiKey = ApiKey::where('shop_id', $shop->id)->with('accessLevel', 'shop')->first();
 
 	return View::make('hello')->with('apiKey', $apiKey);
-});
+})->before('shopify.auth');
 
 
 Route::get('/install', function()

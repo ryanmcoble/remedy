@@ -1,21 +1,10 @@
 <?php
 
-use Coble\General\API\ResponseBuilder;
-use Coble\General\Repositories\ProductRepository;
+use Coble\General\Commanding\Products\RetrieveProductsCommand;
 
 
 class ProductController extends BaseController
 {
-	protected $productRepo;
-	protected $response;
-
-	public function __construct(ResponseBuilder $response, ProductRepository $productRepo)
-	{
-		parent::__construct();
-
-		$this->response    = $response;
-		$this->productRepo = $productRepo;
-	}
 	
 	/**
 	 * Get a single product
@@ -53,30 +42,24 @@ class ProductController extends BaseController
 		// 	// get un-filtered results
 		// }
 
-		// if(Input::has('sorted')) {
+		// if(Input::has('sorted_by')) {
 		// 	// sort results
 		// }
 
+		$filters = Input::has('filters') ? Input::get('filters') : '';
 
 		$limit = Input::has('limit') ? (int) Input::get('limit') : 100;
-		if($limit > 1000) $limit = 1000;
+		if($limit > 1000) $limit = 1000; // limit to 1000
+
+		$sorted_by = Input::has('sorted_by') ? (int) Input::get('sorted_by') : '';
 
 
-		$products = $this->productRepo->getAll($limit)->toArray();
+		return $this->commandBus->execute(new RetrieveProductsCommand(
+			$filters,
+			$limit,
+			$sorted_by
+		));
 
-
-		$this->response->setApiKey($this->apiKey);
-		if(!count($products))
-		{
-			$this->response->setStatus(404, 'not_found', 'No products were found.');
-		}
-		else
-		{
-			$this->response->setStatus(200, 'success', count($products) . ' products were found.');
-			$this->response->setData($products);
-		}
-
-		return $this->response->getResponse();
 	}
 
 }
