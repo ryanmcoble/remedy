@@ -65,18 +65,23 @@ class AccessLevelSeeder extends Seeder
 			],
 		];
 
-		
-		DB::table('api_access_levels')->delete();
+		$count = AccessLevel::all()->count();
 
-		foreach($seedData as $access)
-		{
-			$accessLevel = new AccessLevel;
-			$accessLevel->level          = $access['level'];
-			$accessLevel->title          = $access['title'];
-			$accessLevel->request_limit  = $access['request_limit'];
-			$accessLevel->interval_type  = $access['interval_type'];
-			$accessLevel->interval_value = $access['interval_value'];
-			$accessLevel->save();
+		if(!$count) {
+
+			DB::table('api_access_levels')->delete();
+
+			foreach($seedData as $access)
+			{
+				$accessLevel = new AccessLevel;
+				$accessLevel->level          = $access['level'];
+				$accessLevel->title          = $access['title'];
+				$accessLevel->request_limit  = $access['request_limit'];
+				$accessLevel->interval_type  = $access['interval_type'];
+				$accessLevel->interval_value = $access['interval_value'];
+				$accessLevel->save();
+			}
+
 		}
 
 	}

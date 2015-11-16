@@ -15,10 +15,16 @@ class CachingProductRepository implements ProductRepository
 	}
 
 
-	public function getAll()
+	public function getAll($limit)
 	{
-		return $this->cache->remember('products.all', 30, function() {
-			return $this->repository->getAll();
+
+		//dd($this->repository->getAll($limit)->getCollection()->toArray());
+
+		return $this->cache->remember('products.all', 30, function() use ($limit) {
+
+			$products = $this->repository->getAll($limit)->getCollection()->toArray();
+
+			return $products;
 		});
 	}
 

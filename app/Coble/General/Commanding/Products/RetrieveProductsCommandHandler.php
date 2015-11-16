@@ -37,7 +37,7 @@ class RetrieveProductsCommandHandler implements CommandHandler
 
 	public function handle($command)
 	{
-		$products = $this->productRepo->getAll($command->limit)->toArray();
+		$products = $this->productRepo->getAll($command->limit);
 
 		$this->responseBuilder->setApiKey($this->apiKey);
 		if(!count($products))

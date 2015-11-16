@@ -11,7 +11,9 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
+		
 		$this->call('AccessLevelSeeder');
+		$this->call('ProductSeeder');
 	}
 
 }

@@ -13,10 +13,10 @@ class EloquentProductRepository implements ProductRepository
 	 * Get all
 	 * @return Collection of Product models
 	 */
-	public function getAll()
+	public function getAll($limit)
 	{
-		//return Product::paginate($limit);
-		return Product::all();
+		//dd(Product::paginate($limit));
+		return Product::paginate($limit);
 	}
 
 	/**

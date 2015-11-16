@@ -3,7 +3,7 @@ namespace Coble\General\Repositories;
 
 interface ProductRepository
 {
-	public function getAll();
+	public function getAll($limit);
 
 	public function find($id);
 }

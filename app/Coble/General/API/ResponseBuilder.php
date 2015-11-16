@@ -3,7 +3,7 @@ namespace Coble\General\API;
 
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Paginator;
 
 use ApiKey;
 use ApiLog;
@@ -60,8 +60,14 @@ class ResponseBuilder
 	 * @param Paginator $products - array of products
 	 * @param array $data - array of 
 	 */
-	protected function buildPagination(Paginator $object)
+	protected function buildPagination($object)
 	{
+
+		//die(var_dump($object));
+
+		// build paginator
+		$object = Paginator::make($object, count($object), 1);
+
 		if($object->getTotal() > $object->getPerPage()) {
 			$this->pagination = [
 				'total' => $object->getTotal(),
