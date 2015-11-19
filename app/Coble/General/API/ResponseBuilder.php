@@ -33,11 +33,6 @@ class ResponseBuilder
 		$this->apiKey           = ApiKey::where('public_key', $public_key)->first();
 	}
 
-	public function setApiKey(ApiKey $apiKey)
-	{
-		$this->apiKey = $apiKey;
-	}
-
 	public function setStatus($code = 200, $status = 'success', $message = '')
 	{
 		$this->statusCode = $code;
@@ -121,7 +116,7 @@ class ResponseBuilder
 		// }
 
 		// auto-check for error status codes and log the db
-		if($this->statusCode > 400)
+		if($this->statusCode > 400 && $this->apiKey)
 		{
 			$log = new ApiLog;
 			$log->api_key_id = $this->apiKey->id;

@@ -16,8 +16,6 @@ class RetrieveProductsCommandHandler implements CommandHandler
 
 	protected $responseBuilder;
 
-	protected $apiKey;
-
 
 	public function __construct(ProductRepository $productRepo, ResponseBuilder $responseBuilder)
 	{
