@@ -20,7 +20,7 @@ Route::get('/', function()
 
 Route::get('/install', function()
 {
-	return View::make('install');
+	return View::make('install')->with('install_url', '');
 });
 Route::post('/install', function()
 {

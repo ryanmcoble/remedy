@@ -16,10 +16,14 @@ class RepositoriesServiceProvider extends ServiceProvider
 
 		// Product
 		$this->app->singleton('Coble\General\Repositories\ProductRepository', function() {
+			
+			// DISABLE CACHE for now
 			return new CachingProductRepository(
 				new EloquentProductRepository,
 				$this->app['cache.store']
 			);
+
+			//return new EloquentProductRepository();
 		});
 
 	}

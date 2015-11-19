@@ -25,6 +25,13 @@ class ResponseBuilder
 	private $pagination = [];
 
 
+	public function __construct()
+	{
+		// store the current request's api key
+		$public_key             = Request::header('X-Remedy-Auth');
+
+		$this->apiKey           = ApiKey::where('public_key', $public_key)->first();
+	}
 
 	public function setApiKey(ApiKey $apiKey)
 	{
@@ -63,19 +70,19 @@ class ResponseBuilder
 	protected function buildPagination($object)
 	{
 
-		//die(var_dump($object));
+		// $object = $object->toArray();
 
-		// build paginator
-		$object = Paginator::make($object, count($object), 1);
+		// // build paginator
+		// $object = Paginator::make($object, count($object), 1);
 
-		if($object->getTotal() > $object->getPerPage()) {
-			$this->pagination = [
-				'total' => $object->getTotal(),
-				'total_pages' => ceil($object->getTotal() / $object->getPerPage()),
-				'current_page' => $object->getCurrentPage(),
-				'per_page' => $object->getPerPage(),
-			];
-		}
+		// if($object->getTotal() > $object->getPerPage()) {
+		// 	$this->pagination = [
+		// 		'total' => $object->getTotal(),
+		// 		'total_pages' => ceil($object->getTotal() / $object->getPerPage()),
+		// 		'current_page' => $object->getCurrentPage(),
+		// 		'per_page' => $object->getPerPage(),
+		// 	];
+		// }
 
 	}
 
@@ -108,12 +115,12 @@ class ResponseBuilder
 		}
 
 		// only if pagination is needed
-		if($this->pagination)
-		{
-			$responseData['status']['pagination'] = $this->pagination;
-		}
+		// if($this->pagination)
+		// {
+		// 	$responseData['status']['pagination'] = $this->pagination;
+		// }
 
-		// auto-check for error status codes
+		// auto-check for error status codes and log the db
 		if($this->statusCode > 400)
 		{
 			$log = new ApiLog;

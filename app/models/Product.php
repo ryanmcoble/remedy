@@ -37,5 +37,10 @@ class Product extends Eloquent {
     return $this->hasMany('ProductMetafield', 'product_id', 'id');
   }
 
+  public function options()
+  {
+    return $this->hasMany('ProductOption', 'product_id', 'id');
+  }
+
   
 }

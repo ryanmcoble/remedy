@@ -48,16 +48,20 @@ class ProductController extends BaseController
 
 		$filters = Input::has('filters') ? Input::get('filters') : '';
 
+		//Log::info($filters);
+
 		$limit = Input::has('limit') ? (int) Input::get('limit') : 100;
 		if($limit > 1000) $limit = 1000; // limit to 1000
 
-		$sorted_by = Input::has('sorted_by') ? (int) Input::get('sorted_by') : '';
+		$sorted_by = Input::has('sorted_by') ? Input::get('sorted_by') : '';
 
+		$with = Input::has('with') ? Input::get('with') : '';
 
 		return $this->commandBus->execute(new RetrieveProductsCommand(
 			$filters,
 			$limit,
-			$sorted_by
+			$sorted_by,
+			$with
 		));
 
 	}

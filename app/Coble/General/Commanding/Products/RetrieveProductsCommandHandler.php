@@ -1,15 +1,12 @@
 <?php
 namespace Coble\General\Commanding\Products;
 
-use Illuminate\Support\Facades\Request;
-
 use Coble\General\Commanding\CommandHandler;
 
 use Coble\General\API\ResponseBuilder;
 
 use Coble\General\Repositories\ProductRepository;
 
-use ApiKey;
 
 
 class RetrieveProductsCommandHandler implements CommandHandler
@@ -27,19 +24,16 @@ class RetrieveProductsCommandHandler implements CommandHandler
 		$this->productRepo      = $productRepo;
 
 		$this->responseBuilder  = $responseBuilder;
-
-		// store the current request's api key
-		$public_key             = Request::header('X-Remedy-Auth');
-
-		$this->apiKey           = ApiKey::where('public_key', $public_key)->first();
 	}
 	
 
 	public function handle($command)
 	{
-		$products = $this->productRepo->getAll($command->limit);
+		//$products = $this->productRepo->getAll($command->limit);
 
-		$this->responseBuilder->setApiKey($this->apiKey);
+		$products = $this->productRepo->getFiltered($command->filters, $command->limit, $command->sorted_by, $command->with);
+
+
 		if(!count($products))
 		{
 			$this->responseBuilder->setStatus(404, 'not_found', 'No products were found.');

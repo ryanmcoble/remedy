@@ -28,6 +28,19 @@ class CachingProductRepository implements ProductRepository
 		});
 	}
 
+	public function getFiltered($filtersString, $limit = 20, $sorted_by = 'id', $withString = '')
+	{
+
+		//dd($this->repository->getAll($limit)->getCollection()->toArray());
+
+		return $this->cache->remember('products.all', 30, function() use ($filtersString, $limit, $sorted_by, $withString) {
+
+			$products = $this->repository->getFiltered($filtersString, $limit, $sorted_by, $withString);
+
+			return $products;
+		});
+	}
+
 
 	public function find($id)
 	{
