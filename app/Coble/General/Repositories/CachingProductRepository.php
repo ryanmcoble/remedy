@@ -15,14 +15,24 @@ class CachingProductRepository implements ProductRepository
 	}
 
 
+	public function getCacheKey(array $data)
+	{
+		return md5(implode('+', $data));
+	}
+
+
 	public function getAll($limit)
 	{
 
 		//dd($this->repository->getAll($limit)->getCollection()->toArray());
 
-		return $this->cache->remember('products.all', 30, function() use ($limit) {
+		$data = [
+			$limit,
+		];
 
-			$products = $this->repository->getAll($limit)->getCollection()->toArray();
+		return $this->cache->remember('products.all.' . $this->getCacheKey($data), 5, function() use ($limit) {
+
+			$products = $this->repository->getAll($limit);
 
 			return $products;
 		});
@@ -33,7 +43,15 @@ class CachingProductRepository implements ProductRepository
 
 		//dd($this->repository->getAll($limit)->getCollection()->toArray());
 
-		return $this->cache->remember('products.all', 30, function() use ($filtersString, $limit, $sorted_by, $withString) {
+		$data = [
+			$filtersString,
+			$limit,
+			$sorted_by,
+			$withString,
+		];
+
+
+		return $this->cache->remember('products.filtered.' . $this->getCacheKey($data), 5, function() use ($filtersString, $limit, $sorted_by, $withString) {
 
 			$products = $this->repository->getFiltered($filtersString, $limit, $sorted_by, $withString);
 
@@ -44,7 +62,7 @@ class CachingProductRepository implements ProductRepository
 
 	public function find($id)
 	{
-		return $this->cache->remember('products.one', 30, function() use ($id) {
+		return $this->cache->remember('products.one', 5, function() use ($id) {
 			return $this->repository->find($id);
 		});
 	}
