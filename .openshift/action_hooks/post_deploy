@@ -1,4 +1,0 @@
-cd $OPENSHIFT_REPO_DIR
-php artisan migrate --force
-php artisan db:seed --force
-composer update -q --no-ansi
