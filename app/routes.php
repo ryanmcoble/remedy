@@ -18,6 +18,11 @@ Route::get('/', function()
 })->before('shopify.auth');
 
 
+/**
+ * Shopify connector
+ */
+
+//installation
 Route::get('/install', function()
 {
 	return View::make('install')->with('install_url', '');
@@ -31,11 +36,6 @@ Route::post('/install', function()
 
 	return View::make('install')->with('install_url', $installUrl);
 });
-
-
-/**
- * Shopify-related routes
- */
 
 //get the install url for the app
 Route::get('/authURL/{url}', array(
@@ -93,7 +93,6 @@ Route::group(['prefix' => 'api/v{version_number}', 'before' => 'api.auth|api.rat
 		$builder->setStatus(418, 'cool', 'I like where your head is at but mine is not there yet. ;)');
 		return $builder->getResponse();
 	});
-	
 
 });
 
