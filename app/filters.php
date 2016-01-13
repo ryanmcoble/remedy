@@ -109,11 +109,19 @@ Route::filter('shopify.auth', function()
 {
 	if(!Session::has('shop'))
 	{
-		App::abort(403, 'Unauthorized through Shopify, please re-install the communicator app.');
+		App::abort(403, 'Unauthorized through Shopify, please re-install the communicator app or check your API key.');
 	}
 });
 
 
+/*
+|--------------------------------------------------------------------------
+| Public API
+|--------------------------------------------------------------------------
+|
+| Public API filter provides header based API key authentication and API rate limiting
+|
+*/
 
 Route::filter('api.auth', function()
 {
