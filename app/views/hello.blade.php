@@ -91,7 +91,7 @@
 	<section class="stats">
 		<h1>https://{{ $apiKey->shop->domain }}</h1>
 		<p class="api-key">API Key: {{ $apiKey->public_key }}</p>
-		<p>Current Plan: {{ $apiKey->access_level->title }} <a href="#">Upgrade Now</a>!</p>
+		<p>Current Plan: {{ $apiKey->access_level->title }} <a href="{{ URL::route('upgrade-account-select') }}">Upgrade Now</a>!</p>
 		<p>Rate Limit: {{ $apiKey->access_level->request_limit }} requests, every {{ $apiKey->access_level->interval_value }} {{ $apiKey->access_level->interval_type }}(s)</p>
 	</section>
 	@endif

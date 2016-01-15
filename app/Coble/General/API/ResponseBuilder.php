@@ -115,7 +115,7 @@ class ResponseBuilder
 		// 	$responseData['status']['pagination'] = $this->pagination;
 		// }
 
-		// auto-check for error status codes and log the db
+		// auto-check for error status codes and log to the db
 		if($this->statusCode > 400 && $this->apiKey)
 		{
 			$log = new ApiLog;

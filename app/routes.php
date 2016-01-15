@@ -53,6 +53,57 @@ Route::post('/uninstall', array(
 ));
 
 
+
+/**
+ * User account routes
+ */
+
+// upgrate the account to a different tier
+Route::get('/user/upgrade', array(
+	'uses' => 'AccountController@getUpgrade',
+	'as' => 'upgrade-account'
+));
+
+// post upgrate the account to a different tier
+Route::post('/user/upgrade', array(
+	'uses' => 'AccountController@postUpgrade',
+	'as' => 'post-upgrade-account'
+));
+
+// change account settings
+Route::get('/user/settings', array(
+	'uses' => 'AccountController@getSettings',
+	'as' => 'update-account-settings'
+));
+
+// post account settings
+Route::post('/user/settings', array(
+	'uses' => 'AccountController@postSettings',
+	'as' => 'post-update-account-settings'
+));
+
+// list account api keys
+Route::get('/user/apikeys', array(
+	'uses' => 'AccountController@postSettings',
+	'as' => 'list-account-apikeys'
+));
+
+// create new account api key
+Route::post('/user/apikeys', array(
+	'uses' => 'AccountController@createApiKey',
+	'as' => 'create-account-apikey'
+));
+
+// delete account api key by id
+Route::delete('/user/apikeys/{apikey_id}', array(
+	'uses' => 'AccountController@deleteApiKey',
+	'as' => 'delete-account-apikey'
+));
+
+
+
+
+
 /**
  * Public API v1 routes
  */
