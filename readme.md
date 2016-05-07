@@ -5,7 +5,6 @@ Remedy API is a REST-ful resource for extending the current version of the Shopi
 
 ## Usage
 
-
 ### Authentication
 
 Authentication currently is done through a simple request header.
@@ -17,15 +16,13 @@ Example:
 
 The way to get an API key currently is install the Remedy Communicator app, which will display your API key, after installation. Multiple API keys can be given upon request. 
 
-
 ### Rate Limiting
 
 Due to our limited resources, requests must be limited per API key. There are different access levels, with different limitations. Currently these level and restrictions are unknown.
 
-
 ### Caching
 
-We will be caching Shopify API results the first time they are request and updating the cache there after. The data will always be up-to-date with what is currently on Shopify. You may also choose to pre-cache all data for quick retrieval. This can be done by updating you settings in the Remedy Communicator Shopify app.
+We will be caching Shopify API results the first time they are requested and updating the cache thereafter. The data will always be up-to-date with what is currently on Shopify. You may also choose to pre-cache all data for quick retrieval. This can be done by updating your settings in the Remedy Communicator Shopify app.
 
 
 ## License
